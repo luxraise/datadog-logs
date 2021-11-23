@@ -10,9 +10,8 @@ type Source struct {
 	logCore
 }
 
-func (s *Source) NewService(service string) *Service {
-	var svc Service
+func (s *Source) MakeService(service string) (svc Service) {
 	svc.logCore = s.logCore
 	svc.Service = service
-	return &svc
+	return
 }
