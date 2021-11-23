@@ -9,9 +9,8 @@ type Host struct {
 	logCore
 }
 
-func (h *Host) NewSource(source string) *Source {
-	var s Source
+func (h *Host) MakeSource(source string) (s Source) {
 	s.logCore = h.logCore
 	s.Source = source
-	return &s
+	return
 }
