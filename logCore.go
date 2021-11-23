@@ -4,7 +4,7 @@ import "fmt"
 
 type logCore struct {
 	Hostname string `json:"hostname,omitempty"`
-	Source   string `json:"ddsource,omitempty"`
+	Source   string `json:"source,omitempty"`
 	Service  string `json:"service,omitempty"`
 
 	Tags Tags `json:"ddtags,omitempty"`
