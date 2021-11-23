@@ -3,11 +3,11 @@ package logs
 import "fmt"
 
 type logCore struct {
-	Hostname string `json:"hostname"`
-	Source   string `json:"ddsource"`
-	Service  string `json:"service"`
+	Hostname string `json:"hostname,omitempty"`
+	Source   string `json:"ddsource,omitempty"`
+	Service  string `json:"service,omitempty"`
 
-	Tags Tags `json:"ddtags"`
+	Tags Tags `json:"ddtags,omitempty"`
 }
 
 func (c logCore) Log(message string, tags ...Tag) {
@@ -76,5 +76,6 @@ func (c logCore) makeLog(message string, tags Tags, level Level) (log Log) {
 	log.logCore = c.copy()
 	log.Tags = tags
 	log.Level = LevelInfo
+	log.Message = message
 	return
 }

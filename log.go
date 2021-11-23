@@ -9,7 +9,7 @@ type Log struct {
 	logCore
 
 	Message string `json:"message"`
-	Level   Level  `json:"level"`
+	Level   Level  `json:"level,omitempty"`
 }
 
 func (l *Log) String() string {
