@@ -10,7 +10,6 @@ type Log struct {
 
 	Message string `json:"message"`
 	Level   Level  `json:"level"`
-	Tags    Tags   `json:"ddtags"`
 }
 
 func (l *Log) String() string {

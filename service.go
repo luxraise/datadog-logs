@@ -1,9 +1,10 @@
 package logs
 
-func MakeService(hostname, source, service string) (s Service) {
+func MakeService(hostname, source, service string, tags ...Tag) (s Service) {
 	s.Hostname = hostname
 	s.Source = source
 	s.Service = service
+	s.Tags = tags
 	return
 }
 
