@@ -1,7 +1,8 @@
 package logs
 
-func MakeHost(hostname string) (h Host) {
+func MakeHost(hostname string, tags ...Tag) (h Host) {
 	h.Hostname = hostname
+	h.Tags = tags
 	return
 }
 
@@ -10,7 +11,7 @@ type Host struct {
 }
 
 func (h *Host) MakeSource(source string) (s Source) {
-	s.logCore = h.logCore
+	s.logCore = h.copy()
 	s.Source = source
 	return
 }
