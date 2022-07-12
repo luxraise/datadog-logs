@@ -35,26 +35,32 @@ func (c logCore) Trace(message string, tags ...Tag) {
 }
 
 func (c logCore) Logf(message string, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelInfo, nil)
 }
 
 func (c logCore) Warnf(message string, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelWarn, nil)
 }
 
 func (c logCore) Errorf(message string, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelError, nil)
 }
 
 func (c logCore) Criticalf(message string, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelCritical, nil)
 }
 
 func (c logCore) Debugf(message string, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelDebug, nil)
 }
 
 func (c logCore) Tracef(message string, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelTrace, nil)
 }
 
