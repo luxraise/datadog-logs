@@ -10,62 +10,115 @@ type logCore struct {
 }
 
 func (c logCore) Log(message string, tags ...Tag) {
-	c.log(message, LevelInfo, tags)
+	c.log(message, LevelInfo, nil, tags)
 }
 
 func (c logCore) Warn(message string, tags ...Tag) {
-	c.log(message, LevelWarn, tags)
+	c.log(message, LevelWarn, nil, tags)
 }
 
 func (c logCore) Error(message string, tags ...Tag) {
-	c.log(message, LevelError, tags)
+	c.log(message, LevelError, nil, tags)
 }
 
 func (c logCore) Critical(message string, tags ...Tag) {
-	c.log(message, LevelCritical, tags)
+	c.log(message, LevelCritical, nil, tags)
 }
 
 func (c logCore) Debug(message string, tags ...Tag) {
-	c.log(message, LevelDebug, tags)
+	c.log(message, LevelDebug, nil, tags)
 }
 
 func (c logCore) Trace(message string, tags ...Tag) {
-	c.log(message, LevelTrace, tags)
+	c.log(message, LevelTrace, nil, tags)
+}
+
+func (c logCore) LogWithData(message string, data interface{}, tags ...Tag) {
+	c.log(message, LevelInfo, data, tags)
+}
+
+func (c logCore) WarnWithData(message string, data interface{}, tags ...Tag) {
+	c.log(message, LevelWarn, data, tags)
+}
+
+func (c logCore) ErrorWithData(message string, data interface{}, tags ...Tag) {
+	c.log(message, LevelError, data, tags)
+}
+
+func (c logCore) CriticalWithData(message string, data interface{}, tags ...Tag) {
+	c.log(message, LevelCritical, data, tags)
+}
+
+func (c logCore) DebugWithData(message string, data interface{}, tags ...Tag) {
+	c.log(message, LevelDebug, data, tags)
+}
+
+func (c logCore) TraceWithData(message string, data interface{}, tags ...Tag) {
+	c.log(message, LevelTrace, data, tags)
 }
 
 func (c logCore) Logf(message string, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
-	c.log(message, LevelInfo, nil)
+	c.log(message, LevelInfo, nil, nil)
 }
 
 func (c logCore) Warnf(message string, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
-	c.log(message, LevelWarn, nil)
+	c.log(message, LevelWarn, nil, nil)
 }
 
 func (c logCore) Errorf(message string, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
-	c.log(message, LevelError, nil)
+	c.log(message, LevelError, nil, nil)
 }
 
 func (c logCore) Criticalf(message string, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
-	c.log(message, LevelCritical, nil)
+	c.log(message, LevelCritical, nil, nil)
 }
 
 func (c logCore) Debugf(message string, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
-	c.log(message, LevelDebug, nil)
+	c.log(message, LevelDebug, nil, nil)
 }
 
 func (c logCore) Tracef(message string, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
-	c.log(message, LevelTrace, nil)
+	c.log(message, LevelTrace, nil, nil)
 }
 
-func (c logCore) log(message string, level Level, tags []Tag) {
-	log := c.makeLog(message, tags, level)
-	log.Tags = append(log.Tags, tags...)
+func (c logCore) LogfWithData(message string, data interface{}, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
+	c.log(message, LevelInfo, data, nil)
+}
+
+func (c logCore) WarnfWithData(message string, data interface{}, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
+	c.log(message, LevelWarn, data, nil)
+}
+
+func (c logCore) ErrorfWithData(message string, data interface{}, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
+	c.log(message, LevelError, data, nil)
+}
+
+func (c logCore) CriticalfWithData(message string, data interface{}, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
+	c.log(message, LevelCritical, data, nil)
+}
+
+func (c logCore) DebugfWithData(message string, data interface{}, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
+	c.log(message, LevelDebug, data, nil)
+}
+
+func (c logCore) TracefWithData(message string, data interface{}, args ...interface{}) {
+	message = fmt.Sprintf(message, args...)
+	c.log(message, LevelTrace, data, nil)
+}
+
+func (c logCore) log(message string, level Level, data interface{}, tags []Tag) {
+	log := c.makeLog(message, level, data, tags)
 	msg := log.String()
 	fmt.Println(msg)
 }
@@ -77,10 +130,11 @@ func (c logCore) copy() (copied logCore) {
 	return
 }
 
-func (c logCore) makeLog(message string, tags Tags, level Level) (log Log) {
+func (c logCore) makeLog(message string, level Level, data interface{}, tags Tags) (log Log) {
 	log.logCore = c.copy()
-	log.Tags = tags
 	log.Level = LevelInfo
 	log.Message = message
+	log.Data = data
+	log.Tags = append(log.Tags, tags...)
 	return
 }

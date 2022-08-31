@@ -8,8 +8,9 @@ import (
 type Log struct {
 	logCore
 
-	Message string `json:"message"`
-	Level   Level  `json:"level,omitempty"`
+	Message string      `json:"message"`
+	Level   Level       `json:"level,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 func (l *Log) String() string {
