@@ -10,8 +10,9 @@ type Host struct {
 	logCore
 }
 
-func (h *Host) MakeSource(source string) (s Source) {
+func (h *Host) MakeService(service string, tags ...Tag) (s Service) {
 	s.logCore = h.copy()
-	s.Source = source
+	s.Service = service
+	s.Tags = append(s.Tags, tags...)
 	return
 }
