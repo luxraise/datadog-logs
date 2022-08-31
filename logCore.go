@@ -87,32 +87,32 @@ func (c logCore) Tracef(message string, args ...interface{}) {
 	c.log(message, LevelTrace, nil, nil)
 }
 
-func (c logCore) LogfWithData(message string, data interface{}, args ...interface{}) {
+func (c logCore) LogWithDataf(message string, data interface{}, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelInfo, data, nil)
 }
 
-func (c logCore) WarnfWithData(message string, data interface{}, args ...interface{}) {
+func (c logCore) WarnWithDataf(message string, data interface{}, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelWarn, data, nil)
 }
 
-func (c logCore) ErrorfWithData(message string, data interface{}, args ...interface{}) {
+func (c logCore) ErrorWithDataf(message string, data interface{}, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelError, data, nil)
 }
 
-func (c logCore) CriticalfWithData(message string, data interface{}, args ...interface{}) {
+func (c logCore) CriticalWithDataf(message string, data interface{}, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelCritical, data, nil)
 }
 
-func (c logCore) DebugfWithData(message string, data interface{}, args ...interface{}) {
+func (c logCore) DebugWithDataf(message string, data interface{}, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelDebug, data, nil)
 }
 
-func (c logCore) TracefWithData(message string, data interface{}, args ...interface{}) {
+func (c logCore) TraceWithDataf(message string, data interface{}, args ...interface{}) {
 	message = fmt.Sprintf(message, args...)
 	c.log(message, LevelTrace, data, nil)
 }
